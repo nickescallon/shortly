@@ -48,6 +48,14 @@ h1 {
   background-color: #ccc;
 }
 
+.navigation input {
+  height: 30px;
+  width: 150px;
+  margin-top: 5px;
+  margin-right: 10px;
+  float: right;
+}
+
 #container {
   clear: both;
   margin-top: 10px;
