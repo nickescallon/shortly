@@ -3,10 +3,11 @@ window.Shortly = Backbone.View.extend({
   template: _.template(' \
       <h1>Shortly</h1> \
       <div class="navigation"> \
-      <ul> \
-        <li><a href="#" class="index">All Links</a></li> \
-        <li><a href="#" class="create">Shorten</a></li> \
-      </ul> \
+        <ul> \
+          <li><a href="#" class="index">All Links</a></li> \
+          <li><a href="#" class="create">Shorten</a></li> \
+        </ul> \
+        <input class="search" placeholder="Seach Here..."></input> \
       </div> \
       <div id="container"></div>'
   ),
@@ -47,6 +48,12 @@ window.Shortly = Backbone.View.extend({
             .removeClass('selected')
             .filter('.'+className)
             .addClass('selected');
+  /*-------Fade In/Out Search Bar---------*/          
+    if (className === 'index'){
+      this.$el.find('.search').fadeIn();
+    } else {
+      this.$el.find('.search').fadeOut();
+    }  
   }
 
 });
