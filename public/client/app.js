@@ -7,14 +7,17 @@ window.Shortly = Backbone.View.extend({
           <li><a href="#" class="index">All Links</a></li> \
           <li><a href="#" class="create">Shorten</a></li> \
         </ul> \
-        <input class="search" placeholder="Seach Here..."></input> \
+        <form> \
+          <input class="search" placeholder="Seach Here..."></input> \
+        </form> \
       </div> \
       <div id="container"></div>'
   ),
 
   events: {
     "click li a.index":  "renderIndexView",
-    "click li a.create": "renderCreateView"
+    "click li a.create": "renderCreateView",
+    "submit": "renderFilteredView"
   },
 
   initialize: function(){
@@ -54,6 +57,16 @@ window.Shortly = Backbone.View.extend({
     } else {
       this.$el.find('.search').fadeOut();
     }  
+  },
+
+  renderFilteredView: function(e){
+    e && e.preventDefault();
+    var form = this.$el.find('.search');
+    var text = form.val();
+    var filtered = new Shortly.Filtered([], {title: text});
+    var linksView = new Shortly.LinksView( {collection: filtered} );
+    this.$el.find('#container').html( linksView.render().el );
+    form.val('');
   }
 
 });

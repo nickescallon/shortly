@@ -64,6 +64,14 @@ get '/links' do
     }.to_json
 end
 
+get '/links/:title' do
+    puts Link.arel_table
+    links = Link.where(Link.arel_table[:title].matches(params[:title]+'%'))
+    links.map { |link|
+        link.as_json.merge(base_url: request.base_url)
+    }.to_json
+end
+
 post '/links' do
     data = JSON.parse request.body.read
     uri = URI(data['url'])
